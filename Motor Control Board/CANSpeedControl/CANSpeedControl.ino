@@ -44,7 +44,7 @@ void loop()
     */
 
     SetSpeed(id, MotorSpeed*(-1));
-    RelativeEncoder(id);
+    AbsoluteEncoder(id);
     //CANMonitor();
     CANReport();
 
@@ -168,11 +168,10 @@ void AbsoluteEncoder(uint8_t id)
 }
 
 //Sends out a request for relative encoder position from MCB with given ID
+//WARNING!!!! This request currently yields only zeros. 
+//Its possible its only for use in closed loop control mode.
 void RelativeEncoder(uint8_t id)
 {
-  //"Who's asking?"         (index 0)
-  //"Whatcha want?"         (index 1-2)
-  //get data from motor 1   (index 3)
   unsigned char stmp[4] = {1, 0x58, 0, 1}; 
   
   id = (id<<4) | 0x05; //opcode of 5
