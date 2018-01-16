@@ -28,6 +28,8 @@ void setup()
 unsigned char id = 0x3; 
 int16_t MotorSpeed = 900; 
 
+unsigned long PrevMils = 0, sum = 0, send_count = 0;
+
 void loop()
 {
     /*
@@ -43,11 +45,30 @@ void loop()
 
     */
 
-    SetSpeed(id, MotorSpeed*(-1));
-    AbsoluteEncoder(id);
-    //CANMonitor();
-    CANReport();
+    MotorSpeed = analogRead(0)*(2000.0/1024.0) - 1000.0;
 
+    for(id = 2; id < 7; id++)
+    {
+      SetSpeed(id, MotorSpeed);
+      AbsoluteEncoder(id);
+      GetCurrentConsumption(id);
+      //CANMonitor();
+      CANReport();
+    }
+
+    /*
+
+    sum += millis()-PrevMils;
+    send_count++;
+    PrevMils = millis();
+
+    if(send_count > 1000)
+    {
+      Serial.print("Rate: ");Serial.print(1000.0/(sum / ((float)send_count)));Serial.println(" Refreshes per Second.");
+      send_count = 0;
+      sum = 0;
+    }
+    */
 }
 
 void SetSpeed(uint8_t id, int16_t motorSpeed)
@@ -140,11 +161,11 @@ void CANMonitor()
           Serial.print("Speed: ");Serial.print(MotorSpeed/10.0);Serial.print("% ");
           Serial.print("Current: ");Serial.print(current*100);Serial.println(" mA");
         }
-        if(buf[1]==0x58)
+        if(buf[1]==0x5)
         {
-          int32_t encoder = buf[4] | buf[5]<<8 | buf[6]<<16 | buf[7]<<24;
+          long encoder = buf[4] | ((long)buf[5])<<8 | ((long)buf[6]<<16) | ((long)buf[7]<<24);
           Serial.print("Speed: ");Serial.print(MotorSpeed/10.0);Serial.print("% ");
-          Serial.print("Encoder: ");Serial.print(encoder);Serial.println(" ticks");
+          Serial.print("Encoder: ");Serial.print(encoder, HEX);Serial.println(" ticks");
         }
       }
       

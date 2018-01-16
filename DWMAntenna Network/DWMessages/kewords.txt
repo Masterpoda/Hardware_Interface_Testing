@@ -1,0 +1,34 @@
+#######################################
+# Syntax Coloring Map For DWMessages
+####################################### 
+
+DWMessages	KEYWORD1	DWMessagesLibrary
+
+#######################################
+# Methods and Functions 
+#######################################	
+
+DWMessage	KEYWORD2
+messageSets	KEYWORD2
+printDWMessage	KEYWORD2
+initMessageSet	KEYWORD2
+eqDWMsg	KEYWORD2
+incDWMsg	KEYWORD2
+setMsgByIndex	KEYWORD2
+
+#######################################
+# Constants
+#######################################
+ 
+POLL	LITERAL1
+POLL_ACK	LITERAL1
+RANGE_REPORT	LITERAL1
+RANGE	LITERAL1
+BLINK	LITERAL1
+RANGE_FAILED	LITERAL1
+ANCHOR_1_ADDRESS	LITERAL1
+ANCHOR_2_ADDRESS	LITERAL1
+TAG_3_ADDRESS	LITERAL1
+TAG_4_ADDRESS	LITERAL1
+NUM_SETS	LITERAL1
+SET_SIZE	LITERAL1

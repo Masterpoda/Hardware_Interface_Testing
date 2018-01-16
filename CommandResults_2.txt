@@ -1,0 +1,60 @@
+Get data from ID: 16
+3	0	0	1	1	0	0	0	
+-----------------------------
+Get data from ID: 26
+3	0	0	1	2	0	0	0	
+-----------------------------
+Get data from ID: 146
+3	0	0	1	3	0	0	0	
+-----------------------------
+Get data from ID: 156
+3	0	0	1	A	0	0	0	
+-----------------------------
+Get data from ID: 166
+3	0	0	1	14	0	0	0	
+-----------------------------
+Get data from ID: 176
+3	0	0	1	1E	0	0	0	
+-----------------------------
+Get data from ID: 186
+3	0	0	1	64	0	0	0	
+-----------------------------
+Get data from ID: 196
+3	0	0	1	90	1	0	0	
+-----------------------------
+Get data from ID: 1E6
+3	0	0	1	58	2	0	0	
+-----------------------------
+Get data from ID: 1F6
+3	0	0	1	9C	FF	FF	FF	
+-----------------------------
+Get data from ID: 206
+3	0	0	1	70	FE	FF	FF	
+-----------------------------
+Get data from ID: 216
+3	0	0	1	A8	FD	FF	FF	
+
+setCANcommand(1,_GO, 1, 1)
+wait(50)
+setCANcommand(2,_GO, 1, 2)
+wait(50)
+setCANcommand(20,_GO, 1, 3)
+wait(50)
+setCANcommand(21,_GO, 1, 10)
+wait(50)
+setCANcommand(22,_GO, 1, 20)
+wait(50)
+setCANcommand(23,_GO, 1, 30)
+wait(50)
+setCANcommand(24,_GO, 1, 100)
+wait(50)
+setCANcommand(25,_GO, 1, 400)
+wait(50)
+setCANcommand(30,_GO, 1, 600)
+wait(50)
+setCANcommand(31,_GO, 1, -100)
+wait(50)
+setCANcommand(32,_GO, 1, -400)
+wait(50)
+setCANcommand(33,_GO, 1, -600)
+wait(50)

@@ -1,0 +1,37 @@
+' This script is provided "as-is", without warranty of any kind,
+' expressed or implied, including but not limited to the warranties of
+' merchatability, fitness for a particular purpose and
+' noninfringemement. In no event shall Roboteq be liable for any claim,
+' damages or other liability, arising from the use of the software."
+
+
+' Home search
+' Apply 50% reverse in open loop power until home switch is activated
+' then change to Closed Loop Count Position mode
+' Initial steps done at script startup
+
+print("starting ... \r")
+
+setconfig(_MMOD, 1, 0) ' Configure channel 1 in open loop mode
+setconfig(_DINA, 1, 24) ' Configure Input 1 to load home counter 1
+
+setcommand(_G, 1, -500) ' Apply 50% reverse command to motor 1
+
+' Loop until limit switch is set
+top:
+if (getvalue(_DI, 1) = 0)
+	' switch not hit
+	wait(5) ' pause script for 5ms
+	goto top
+else
+	' switch hit
+	setconfig(_DINA, 1, 0) ' Disable home counter loading on input 1
+	
+	counter = getvalue(_C, 1) ' read actual counter position
+	setcommand(_P, 1, counter) ' make current position become destination so that the motor doesnt move
+	
+	setconfig(_MMOD, 1, 2) ' Switch to closed loop encoder count mode
+	terminate
+end if
+
+
